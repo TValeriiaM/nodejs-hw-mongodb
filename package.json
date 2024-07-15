@@ -6,19 +6,26 @@
   "scripts": {
     "lint": "eslint src/**/*.js",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js",
     "dev": "nodemon src/index.js"
   },
   "keywords": [],
-  "author": "Tyan Valeriia <kuharets.v@gmail.com>",
+  "author": "Tyran Valeriia <kuharets.v@gmail.com>",
   "license": "ISC",
   "description": "",
   "devDependencies": {
     "@eslint/js": "^9.6.0",
     "eslint": "^9.6.0",
     "globals": "^15.8.0",
-    "nodemon": "^3.1.4"
+    "nodemon": "^3.1.4",
+    "pino-pretty": "^11.2.1"
   },
   "dependencies": {
-    "express": "^4.19.2"
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongodb": "^6.8.0",
+    "mongoose": "^8.5.0",
+    "pino-http": "^10.2.0"
   }
 }
