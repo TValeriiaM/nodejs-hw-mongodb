@@ -45,14 +45,12 @@ export const setupServer = () => {
       message: `Successfully found contact with id ${contactId}!`,
       data: contact,
     });
-    next();
   });
 
   app.use('*', (req, res, next) => {
     res.status(404).json({
       message: 'Not found',
     });
-    next();
   });
 
   app.use((err, req, res, next) => {
@@ -60,7 +58,6 @@ export const setupServer = () => {
       message: 'Something went wrong',
       error: err.message,
     });
-    next();
   });
 
   app.listen(PORT, () => {
