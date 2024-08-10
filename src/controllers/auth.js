@@ -36,7 +36,7 @@ export const loginUserController = async (req, res) => {
 };
 
 export const logoutUserController = async (req, res) => {
-  if (req.cookies.sessionId) {
+  if (typeof req.cookies.sessionId === 'string') {
     await logoutUser(req.cookies.sessionId);
   }
 
