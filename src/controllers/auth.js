@@ -77,7 +77,7 @@ export const refreshUserSessionController = async (req, res) => {
   });
 };
 
-export const requestResetEmailController = async (req, res) => {
+export const requestResetEmailController = async (req, res, next) => {
   try {
     await requestResetToken(req.body.email);
     res.json({
@@ -85,11 +85,9 @@ export const requestResetEmailController = async (req, res) => {
       status: 200,
       data: {},
     });
-  } catch {
-    throw createHttpError(
-      500,
-      'Failed to send the email, please try again later.',
-    );
+  } catch (err) {
+    createHttpError(500, 'Failed to send the email, please try again later.');
+    next(err);
   }
 };
 
