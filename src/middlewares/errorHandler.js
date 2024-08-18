@@ -1,7 +1,7 @@
 // import { HttpError } from 'http-errors';
 import { isHttpError } from 'http-errors';
 
-export const errorHandler = (err, _req, res, _next) => {
+export const errorHandler = (err, _req, res) => {
   /// Ось цей код з конспекту не спрацював, видавало помилку 500 на неіснуючий ID контакту..///
 
   //   if (err instanceof HttpError) {

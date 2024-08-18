@@ -1,10 +1,13 @@
-import { registerUser } from '../services/auth.js';
-import { loginUser } from '../services/auth.js';
 import { THIRTY_DAYS } from '../constants/index.js';
-import { logoutUser } from '../services/auth.js';
-import { refreshUsersSession } from '../services/auth.js';
-import { requestResetToken } from '../services/auth.js';
-import { resetPassword } from '../services/auth.js';
+import {
+  registerUser,
+  loginUser,
+  logoutUser,
+  refreshUsersSession,
+  requestResetToken,
+  resetPassword,
+  loginOrSignupWithGoogle,
+} from '../services/auth.js';
 import { generateAuthUrl } from '../utils/googleOAuth2.js';
 import createHttpError from 'http-errors';
 
@@ -78,7 +81,7 @@ export const refreshUserSessionController = async (req, res) => {
   });
 };
 
-export const requestResetEmailController = async (req, res) => {
+export const requestResetEmailController = async (req, res, next) => {
   try {
     await requestResetToken(req.body.email);
     res.json({
@@ -86,11 +89,9 @@ export const requestResetEmailController = async (req, res) => {
       status: 200,
       data: {},
     });
-  } catch {
-    throw createHttpError(
-      500,
-      'Failed to send the email, please try again later.',
-    );
+  } catch (err) {
+    createHttpError(500, 'Failed to send the email, please try again later.');
+    next(err);
   }
 };
 
@@ -110,6 +111,19 @@ export const getGoogleOAuthUrlController = async (req, res) => {
     message: 'Successfully get Google OAuth url!',
     data: {
       url,
+    },
+  });
+};
+
+export const loginWithGoogleController = async (req, res) => {
+  const session = await loginOrSignupWithGoogle(req.body.code);
+  setupSession(res, session);
+
+  res.json({
+    status: 200,
+    message: 'Successfully logged in via Google OAuth!',
+    data: {
+      accessToken: session.accessToken,
     },
   });
 };

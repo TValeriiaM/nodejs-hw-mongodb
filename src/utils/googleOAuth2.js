@@ -12,7 +12,6 @@ const googleOAuthClient = new OAuth2Client({
   clientId: env('GOOGLE_AUTH_CLIENT_ID'),
   clientSecret: env('GOOGLE_AUTH_CLIENT_SECRET'),
   redirectUri: oauthConfig.web.redirect_uris[0],
-  //   ["http://localhost:9990/confirm-google-auth"]
 });
 
 export const generateAuthUrl = () =>
