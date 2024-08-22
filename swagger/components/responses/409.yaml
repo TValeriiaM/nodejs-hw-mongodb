@@ -1,4 +1,4 @@
-description: Not found error
+description: Email in use
 content:
   application/json:
     schema:
@@ -9,7 +9,7 @@ content:
       properties:
         status:
           type: integer
-          example: 404
+          example: 409
         message:
           type: string
-          example: 'Contact not found'
+          example: 'Email in use'
